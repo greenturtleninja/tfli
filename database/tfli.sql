@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS TFLI (
+shortened TEXT UNIQUE,
+URI TEXT,
+expires TEXT
+);
