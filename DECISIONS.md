@@ -1,11 +1,17 @@
 ## Code Structure
 
- - app - Point the root web root to this folder.
-  - index.php - The access file, this handles the root and processing of api calls
+I'm thinking this would be an internal admin tool for marketers to create short links for campaigns. So it shouldn't need the protection of a full public facing system. Would suspect this would be behind a firewall, if not that would ramp up the security and also add a captcha or a aws waf challenge (or similar Cloud platform security for frontend).
+
+ - app - Folder for api files.
+  - index.php - api handler for processing of api calls
   - router.php - Handles the crud opperations of the routes
   - db.php - Creates a db object to be used by the router class. Makes it easier to change db if needed (if SQL is compatible) 
+ - public
+  - index.html - static content
 
 ## Done Differently
+
+Use a docker container, nginx with php and install vue or vite for the static content
 
 ## Other Software
 
@@ -23,6 +29,8 @@ Fix/Add the missing PHP extensions
 ### Security
 
 Implement JWT token and user login screens for access to the url CRUD application or implement API token for directly editing via api requests
+
+Validation - both frontend and backend
 
 ### Unit testing
 

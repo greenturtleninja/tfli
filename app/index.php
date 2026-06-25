@@ -1,16 +1,31 @@
 <?php
-declare(strict_types=1);
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+
+require __DIR__ . '/../vendor/autoload.php';
 require "router.php";
 
-date_default_timezone_set('UTC');
+$app = AppFactory::create();
+$app->addBodyParsingMiddleware();
+$app->addErrorMiddleware(true, true, true);
 
+$app->get('/url/{short}', function (Request $request, Response $response, $short) {
+    $response->getBody()->write(json_encode(['routes' => [$short],'status' => 'ready']));
+    return $response->withHeader('Content-Type', 'application/json');
+});
 
-$request = $_SERVER['REQUEST_URI'];
+$app->get('/api/uri', function (Request $request, Response $response) {
+    $router = new Router();
+    $allRoutes = $router->getAll();
+    $response->getBody()->write(json_encode(['routes' => $allRoutes,'status' => 'ready']));
+    return $response->withHeader('Content-Type', 'application/json');
+});
 
-$routes = new Router();
+$app->post('/api/uris', function (Request $request, Response $response) {
+    $response->getBody()->write(json_encode(['service' => 'testing input', 'status' => 'ready']));
+    return $response->withHeader('Content-Type', 'application/json');
+});
 
-$uris = explode("/", $request);
-
-if (count($uris) === 3) {
-    $routes->redirect($uris[2]);
-}
+$app->run();

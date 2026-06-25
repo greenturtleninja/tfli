@@ -10,7 +10,7 @@ tfli database using the sqlite3.exe and the scripts
 ```
 >cd database
 >c:\sqlite\sqlite3.exe tfli.db
-sqlite>.read tfli.sql
+sqlite>.read create_table_tfli.sql
 sqlite>.exit
 
 The above will create the tfli databse and table
@@ -90,7 +90,6 @@ session.gc_maxlifetime = 1440
 session.cache_limiter = nocache
 session.cache_expire = 180
 session.use_trans_sid = 0
-session.sid_bits_per_character = 5
 ```
 
 Edit the `c:\nginx\conf\nginx.conf` and replace the `server {}` with the below server section. 
