@@ -14,7 +14,3 @@ $uris = explode("/", $request);
 if (count($uris) === 3) {
     $routes->redirect($uris[2]);
 }
-
-// var_dump($routes->getAll());
-
-echo 'Hello there' . $request;
